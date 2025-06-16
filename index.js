@@ -7,7 +7,7 @@ const PORT = 3000
 const services = [
   { name: 'Forum', url: 'https://forumm.dmenu.me/' },
   { name: 'Main Website', url: 'https://www.dmenu.me/' },
-  { name: 'GM Players', url: 'https://singapore-gms.dmenu.me/' },
+  { name: 'GM Players', url: 'https://gms.dmenu.me/' },
   { name: 'Paid Cheat DataBase', url: 'https://dba.dmenu.me/' }
 ]
 
