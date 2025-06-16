@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DMenu Status</title>
+  <link rel="icon" href="https://d-menu-data.vercel.app/icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #000000, #0a0f2b, #1e003d);
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 30px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 3em;
+      font-weight: 800;
+      color: #a87fff;
+      text-shadow: 0 0 15px rgba(168, 127, 255, 0.5);
+    }
+
+    .status-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .status {
+      font-size: 1.2em;
+      font-weight: 600;
+      padding: 10px 30px;
+      border-radius: 10px;
+      background-color: #1a1a2e;
+      border: 2px solid #a87fff;
+      transition: 0.3s ease;
+    }
+
+    .status.online {
+      color: #00ff8c;
+      border-color: #00ff8c;
+    }
+
+    .status.offline {
+      color: #ff4f4f;
+      border-color: #ff4f4f;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>DMenu Service Status</h1>
+    <div class="status-list" id="statusList">
+      <div>Loading...</div>
+    </div>
+  </div>
+
+  <script>
+    fetch('/status')
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('statusList')
+        list.innerHTML = ''
+        data.forEach(s => {
+          const div = document.createElement('div')
+          div.className = 'status ' + (s.online ? 'online' : 'offline')
+          div.textContent = `${s.name} — ${s.online ? 'Online' : 'Offline'}`
+          list.appendChild(div)
+        })
+      })
+  </script>
+</body>
+</html>
